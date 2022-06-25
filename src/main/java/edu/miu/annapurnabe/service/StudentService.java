@@ -1,6 +1,7 @@
 package edu.miu.annapurnabe.service;
 
-import edu.miu.annapurnabe.dto.Response.StudentResponseDTO;
+import edu.miu.annapurnabe.dto.request.StudentRequestDTO;
+import edu.miu.annapurnabe.dto.response.StudentResponseDTO;
 
 import java.util.List;
 
@@ -11,4 +12,8 @@ import java.util.List;
 public interface StudentService {
 
     List<StudentResponseDTO> getStudents();
+
+    StudentResponseDTO getStudentById(Long studentId);
+
+    StudentResponseDTO registerStudent(StudentRequestDTO studentRequestDTO);
 }

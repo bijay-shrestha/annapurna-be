@@ -2,9 +2,12 @@ package edu.miu.annapurnabe.repository;
 
 import edu.miu.annapurnabe.model.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 /**
  * @author bijayshrestha on 6/24/22
@@ -13,4 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 @Transactional(propagation = Propagation.MANDATORY)
 public interface StudentRepository extends JpaRepository<Student, Long> {
+
+    @Query("SELECT s FROM Student s WHERE s.id=:id and s.status='Y'")
+    Optional<Student> findById(Long id);
 }

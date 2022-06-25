@@ -11,6 +11,8 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.util.List;
 
+import static edu.miu.annapurnabe.constant.BCryptConstant.COST;
+
 /**
  * @author bijayshrestha on 6/24/22
  * @project annapurna-be
@@ -28,7 +30,7 @@ public class StudentStarterConfig {
                     "Bijay Shrestha",
                     "bijayshrestha@miu.edu",
                     "bijay",
-                    BCrypt.withDefaults().hashToString(12, "bijay".toCharArray()),
+                    BCrypt.withDefaults().hashToString(COST, "bijay".toCharArray()),
                     LocalDate.of(1990, Month.JANUARY, 5),
                     'Y',
                     true);
@@ -38,7 +40,7 @@ public class StudentStarterConfig {
                     "Shelly Neira",
                     "shellyneira@miu.edu",
                     "shelly",
-                    BCrypt.withDefaults().hashToString(12, "shelly".toCharArray()),
+                    BCrypt.withDefaults().hashToString(COST, "shelly".toCharArray()),
                     LocalDate.of(2015, Month.FEBRUARY, 14),
                     'Y',
                     true);
@@ -48,7 +50,7 @@ public class StudentStarterConfig {
                     "Derartu Abdisa",
                     "derartu@miu.edu",
                     "derartu",
-                    BCrypt.withDefaults().hashToString(12, "derartu".toCharArray()),
+                    BCrypt.withDefaults().hashToString(COST, "derartu".toCharArray()),
                     LocalDate.of(2000, Month.MARCH, 10),
                     'Y',
                     true);

@@ -1,8 +1,6 @@
-package edu.miu.annapurnabe.dto.Response;
+package edu.miu.annapurnabe.dto.request;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -12,12 +10,12 @@ import java.time.LocalDate;
  * @project annapurna-be
  */
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class StudentResponseDTO implements Serializable {
+public class StudentRequestDTO implements Serializable {
     private Integer studentId;
     private String fullName;
+    private String email;
     private String username;
+    private String password;
     private LocalDate dob;
     private Character status;
     private boolean subscribed;
