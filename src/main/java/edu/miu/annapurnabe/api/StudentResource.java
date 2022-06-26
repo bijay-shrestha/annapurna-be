@@ -7,9 +7,7 @@ import edu.miu.annapurnabe.service.StudentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.net.URISyntaxException;
-
 import static edu.miu.annapurnabe.constant.WebResourceKeyConstant.API_V1_BASE;
 import static edu.miu.annapurnabe.constant.WebResourceKeyConstant.StudentResourceConstant.STUDENT_BASE;
 import static edu.miu.annapurnabe.constant.WebResourceKeyConstant.StudentResourceConstant.STUDENT_ID;
