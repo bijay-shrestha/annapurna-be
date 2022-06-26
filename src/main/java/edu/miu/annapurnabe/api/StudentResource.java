@@ -1,6 +1,7 @@
 package edu.miu.annapurnabe.api;
 
 import edu.miu.annapurnabe.dto.request.StudentRequestDTO;
+import edu.miu.annapurnabe.dto.request.StudentUpdateRequestDTO;
 import edu.miu.annapurnabe.dto.response.StudentResponseDTO;
 import edu.miu.annapurnabe.service.StudentService;
 import org.springframework.http.HttpStatus;
@@ -39,5 +40,13 @@ public class StudentResource {
     public ResponseEntity<?> registerStudent(@RequestBody StudentRequestDTO studentRequestDTO){
         StudentResponseDTO studentResponseDTO = studentService.registerStudent(studentRequestDTO);
         return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @PutMapping(STUDENT_ID)
+    public ResponseEntity<?> updateStudent(@PathVariable("studentId") Long id,
+                                           @RequestBody StudentUpdateRequestDTO studentUpdateRequestDTO)
+            throws Exception{
+        StudentResponseDTO studentResponseDTO = studentService.updateStudent(id, studentUpdateRequestDTO);
+        return ResponseEntity.ok().body(studentResponseDTO);
     }
 }

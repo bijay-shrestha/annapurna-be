@@ -2,6 +2,7 @@ package edu.miu.annapurnabe.service.impl;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import edu.miu.annapurnabe.dto.request.StudentRequestDTO;
+import edu.miu.annapurnabe.dto.request.StudentUpdateRequestDTO;
 import edu.miu.annapurnabe.dto.response.StudentResponseDTO;
 import edu.miu.annapurnabe.model.Student;
 import edu.miu.annapurnabe.repository.StudentRepository;
@@ -60,5 +61,23 @@ public class StudentServiceImpl implements StudentService {
                 studentRequest.getPassword().toCharArray()));
         Student student = studentRepository.save(studentRequest);
         return modelMapper.map(student, StudentResponseDTO.class);
+    }
+
+    @Override
+    public StudentResponseDTO updateStudent(Long id, StudentUpdateRequestDTO studentUpdateRequestDTO)
+    throws Exception{
+        Student toBeUpdatedStudent = modelMapper.map(studentUpdateRequestDTO, Student.class);
+        Student student = studentRepository.findById(id).orElseThrow(()-> new Exception("Student Not Found"));
+        studentRepository.save(updateStudent(toBeUpdatedStudent, student));
+        return modelMapper.map(student, StudentResponseDTO.class);
+    }
+
+    protected Student updateStudent(Student toBeUpdatedStudent, Student existingStudent){
+        existingStudent.setFullName(toBeUpdatedStudent.getFullName());
+        existingStudent.setEmail(toBeUpdatedStudent.getEmail());
+        existingStudent.setDob(toBeUpdatedStudent.getDob());
+        existingStudent.setStatus(toBeUpdatedStudent.getStatus());
+        existingStudent.setSubscribed(toBeUpdatedStudent.isSubscribed());
+        return existingStudent;
     }
 }
