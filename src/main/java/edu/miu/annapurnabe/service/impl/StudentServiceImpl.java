@@ -72,6 +72,13 @@ public class StudentServiceImpl implements StudentService {
         return modelMapper.map(student, StudentResponseDTO.class);
     }
 
+    @Override
+    public StudentResponseDTO deleteStudent(Long id) throws Exception {
+        Student student = studentRepository.findById(id).orElseThrow(()-> new Exception("Student Not Found"));
+        student.setStatus('D');
+        return modelMapper.map(studentRepository.save(student), StudentResponseDTO.class);
+    }
+
     protected Student updateStudent(Student toBeUpdatedStudent, Student existingStudent){
         existingStudent.setFullName(toBeUpdatedStudent.getFullName());
         existingStudent.setEmail(toBeUpdatedStudent.getEmail());

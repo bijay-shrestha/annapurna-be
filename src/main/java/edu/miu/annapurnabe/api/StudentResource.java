@@ -3,6 +3,7 @@ package edu.miu.annapurnabe.api;
 import edu.miu.annapurnabe.dto.request.StudentRequestDTO;
 import edu.miu.annapurnabe.dto.request.StudentUpdateRequestDTO;
 import edu.miu.annapurnabe.dto.response.StudentResponseDTO;
+import edu.miu.annapurnabe.model.Student;
 import edu.miu.annapurnabe.service.StudentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -48,5 +49,11 @@ public class StudentResource {
             throws Exception{
         StudentResponseDTO studentResponseDTO = studentService.updateStudent(id, studentUpdateRequestDTO);
         return ResponseEntity.ok().body(studentResponseDTO);
+    }
+
+    @DeleteMapping(STUDENT_ID)
+    public ResponseEntity<?> deleteStudent(@PathVariable("studentId") Long id) throws Exception{
+        StudentResponseDTO studentToBeDeleted = studentService.deleteStudent(id);
+        return ResponseEntity.ok().body(studentToBeDeleted);
     }
 }
