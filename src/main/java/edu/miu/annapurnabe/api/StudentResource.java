@@ -3,11 +3,12 @@ package edu.miu.annapurnabe.api;
 import edu.miu.annapurnabe.dto.request.StudentRequestDTO;
 import edu.miu.annapurnabe.dto.request.StudentUpdateRequestDTO;
 import edu.miu.annapurnabe.dto.response.StudentResponseDTO;
-import edu.miu.annapurnabe.model.Student;
 import edu.miu.annapurnabe.service.StudentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.net.URISyntaxException;
 
 import static edu.miu.annapurnabe.constant.WebResourceKeyConstant.API_V1_BASE;
 import static edu.miu.annapurnabe.constant.WebResourceKeyConstant.StudentResourceConstant.STUDENT_BASE;
@@ -38,9 +39,8 @@ public class StudentResource {
     }
 
     @PostMapping
-    public ResponseEntity<?> registerStudent(@RequestBody StudentRequestDTO studentRequestDTO){
-        StudentResponseDTO studentResponseDTO = studentService.registerStudent(studentRequestDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+    public ResponseEntity<?> registerStudent(@RequestBody StudentRequestDTO studentRequestDTO) throws URISyntaxException {
+        return new ResponseEntity<>(studentService.registerStudent(studentRequestDTO), HttpStatus.CREATED);
     }
 
     @PutMapping(STUDENT_ID)
