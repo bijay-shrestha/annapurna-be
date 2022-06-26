@@ -13,7 +13,7 @@ import java.time.LocalDate;
 public class StudentUpdateRequestDTO implements Serializable {
     private String fullName;
     private String email;
-    private LocalDate dob;
+    private LocalDate dateOfBirth;
     private Character status;
     private boolean subscribed;
 }

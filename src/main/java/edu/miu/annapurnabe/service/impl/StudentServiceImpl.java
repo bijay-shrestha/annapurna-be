@@ -81,7 +81,7 @@ public class StudentServiceImpl implements StudentService {
     protected Student updateStudent(Student toBeUpdatedStudent, Student existingStudent){
         existingStudent.setFullName(toBeUpdatedStudent.getFullName());
         existingStudent.setEmail(toBeUpdatedStudent.getEmail());
-        existingStudent.setDob(toBeUpdatedStudent.getDob());
+        existingStudent.setDateOfBirth(toBeUpdatedStudent.getDateOfBirth());
         existingStudent.setStatus(toBeUpdatedStudent.getStatus());
         existingStudent.setSubscribed(toBeUpdatedStudent.isSubscribed());
         return existingStudent;

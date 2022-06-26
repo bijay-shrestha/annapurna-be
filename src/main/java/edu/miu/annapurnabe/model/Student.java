@@ -1,6 +1,5 @@
 package edu.miu.annapurnabe.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -30,7 +29,7 @@ public class Student implements Serializable {
     @Column(nullable = false)
     private String password;
     @Column(nullable = false)
-    private LocalDate dob;
+    private LocalDate dateOfBirth;
     @Column(nullable = false)
     private Character status;
 
@@ -41,7 +40,7 @@ public class Student implements Serializable {
                    String email,
                    String username,
                    String password,
-                   LocalDate dob,
+                   LocalDate dateOfBirth,
                    Character status,
                    boolean subscribed) {
         this.studentId = studentId;
@@ -49,7 +48,7 @@ public class Student implements Serializable {
         this.email = email;
         this.username = username;
         this.password = password;
-        this.dob = dob;
+        this.dateOfBirth = dateOfBirth;
         this.status = status;
         this.subscribed = subscribed;
     }

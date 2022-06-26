@@ -16,7 +16,7 @@ public class StudentRequestDTO implements Serializable {
     private String email;
     private String username;
     private String password;
-    private LocalDate dob;
+    private LocalDate dateOfBirth;
     private Character status;
     private boolean subscribed;
 }
