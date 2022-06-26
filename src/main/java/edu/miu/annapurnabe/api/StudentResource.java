@@ -34,7 +34,7 @@ public class StudentResource {
     }
 
     @GetMapping(STUDENT_ID)
-    public ResponseEntity<?> getStudentById(@PathVariable("studentId") Long id){
+    public ResponseEntity<?> getStudentById(@PathVariable("studentId") Integer id){
         return ResponseEntity.ok().body(studentService.getStudentById(id));
     }
 
@@ -44,7 +44,7 @@ public class StudentResource {
     }
 
     @PutMapping(STUDENT_ID)
-    public ResponseEntity<?> updateStudent(@PathVariable("studentId") Long id,
+    public ResponseEntity<?> updateStudent(@PathVariable("studentId") Integer id,
                                            @RequestBody StudentUpdateRequestDTO studentUpdateRequestDTO)
             throws Exception{
         StudentResponseDTO studentResponseDTO = studentService.updateStudent(id, studentUpdateRequestDTO);
@@ -52,7 +52,7 @@ public class StudentResource {
     }
 
     @DeleteMapping(STUDENT_ID)
-    public ResponseEntity<?> deleteStudent(@PathVariable("studentId") Long id) throws Exception{
+    public ResponseEntity<?> deleteStudent(@PathVariable("studentId") Integer id) throws Exception{
         StudentResponseDTO studentToBeDeleted = studentService.deleteStudent(id);
         return ResponseEntity.ok().body(studentToBeDeleted);
     }

@@ -18,7 +18,7 @@ import java.time.LocalDate;
 public class Student implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
     @Column(nullable = false)
     private Integer studentId;
     @Column(nullable = false, length = 100)

@@ -14,11 +14,11 @@ public interface StudentService {
 
     List<StudentResponseDTO> getStudents();
 
-    StudentResponseDTO getStudentById(Long studentId);
+    StudentResponseDTO getStudentById(Integer studentId);
 
     StudentResponseDTO registerStudent(StudentRequestDTO studentRequestDTO);
 
-    StudentResponseDTO updateStudent(Long id, StudentUpdateRequestDTO studentRequestDTO) throws Exception;
+    StudentResponseDTO updateStudent(Integer id, StudentUpdateRequestDTO studentRequestDTO) throws Exception;
 
-    StudentResponseDTO deleteStudent(Long id) throws Exception;
+    StudentResponseDTO deleteStudent(Integer id) throws Exception;
 }

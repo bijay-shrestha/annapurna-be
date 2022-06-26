@@ -43,7 +43,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public StudentResponseDTO getStudentById(Long studentId) {
+    public StudentResponseDTO getStudentById(Integer studentId) {
         Optional<Student> student = studentRepository.findById(studentId);
         if(student.isPresent()){
             return modelMapper.map(student.get(), StudentResponseDTO.class);
@@ -62,7 +62,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public StudentResponseDTO updateStudent(Long id, StudentUpdateRequestDTO studentUpdateRequestDTO)
+    public StudentResponseDTO updateStudent(Integer id, StudentUpdateRequestDTO studentUpdateRequestDTO)
     throws Exception{
         Student toBeUpdatedStudent = modelMapper.map(studentUpdateRequestDTO, Student.class);
         Student student = studentRepository.findById(id).orElseThrow(()-> new Exception("Student Not Found"));
@@ -71,7 +71,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public StudentResponseDTO deleteStudent(Long id) throws Exception {
+    public StudentResponseDTO deleteStudent(Integer id) throws Exception {
         Student student = studentRepository.findById(id).orElseThrow(()-> new Exception("Student Not Found"));
         student.setStatus('D');
         return modelMapper.map(studentRepository.save(student), StudentResponseDTO.class);
