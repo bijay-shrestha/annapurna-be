@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.net.URISyntaxException;
+import java.util.List;
+
 import static edu.miu.annapurnabe.constant.WebResourceKeyConstant.API_V1_BASE;
 import static edu.miu.annapurnabe.constant.WebResourceKeyConstant.StudentResourceConstant.STUDENT_BASE;
 import static edu.miu.annapurnabe.constant.WebResourceKeyConstant.StudentResourceConstant.STUDENT_ID;
@@ -27,22 +29,22 @@ public class StudentResource {
     }
 
     @GetMapping
-    public ResponseEntity<?> getStudents(){
+    public ResponseEntity<List<StudentResponseDTO>> getStudents(){
         return new ResponseEntity<>(studentService.getStudents(), HttpStatus.OK);
     }
 
     @GetMapping(STUDENT_ID)
-    public ResponseEntity<?> getStudentById(@PathVariable("studentId") Integer id){
+    public ResponseEntity<StudentResponseDTO> getStudentById(@PathVariable("studentId") Integer id){
         return ResponseEntity.ok().body(studentService.getStudentById(id));
     }
 
     @PostMapping
-    public ResponseEntity<?> registerStudent(@RequestBody StudentRequestDTO studentRequestDTO) throws URISyntaxException {
+    public ResponseEntity<StudentResponseDTO> registerStudent(@RequestBody StudentRequestDTO studentRequestDTO) {
         return new ResponseEntity<>(studentService.registerStudent(studentRequestDTO), HttpStatus.CREATED);
     }
 
     @PutMapping(STUDENT_ID)
-    public ResponseEntity<?> updateStudent(@PathVariable("studentId") Integer id,
+    public ResponseEntity<StudentResponseDTO> updateStudent(@PathVariable("studentId") Integer id,
                                            @RequestBody StudentUpdateRequestDTO studentUpdateRequestDTO)
             throws Exception{
         StudentResponseDTO studentResponseDTO = studentService.updateStudent(id, studentUpdateRequestDTO);
@@ -50,7 +52,8 @@ public class StudentResource {
     }
 
     @DeleteMapping(STUDENT_ID)
-    public ResponseEntity<?> deleteStudent(@PathVariable("studentId") Integer id) throws Exception{
+    public ResponseEntity<StudentResponseDTO> deleteStudent(@PathVariable("studentId") Integer id)
+            throws Exception{
         StudentResponseDTO studentToBeDeleted = studentService.deleteStudent(id);
         return ResponseEntity.ok().body(studentToBeDeleted);
     }
