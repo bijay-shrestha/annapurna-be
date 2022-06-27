@@ -15,7 +15,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import static edu.miu.annapurnabe.constant.BCryptConstant.COST;
-import static edu.miu.annapurnabe.constant.StringConstant.StatusConstant.DELETE;
+import static edu.miu.annapurnabe.constant.BooleanConstant.FALSE;
+import static edu.miu.annapurnabe.constant.StatusConstant.DISABLE;
 
 /**
  * @author bijayshrestha on 6/24/22
@@ -74,7 +75,8 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public StudentResponseDTO deleteStudent(Integer id) throws Exception {
         Student student = studentRepository.findById(id).orElseThrow(()-> new Exception("Student Not Found"));
-        student.setStatus(DELETE);
+        student.setStatus(DISABLE);
+        student.setSubscribed(FALSE);
         return modelMapper.map(studentRepository.save(student), StudentResponseDTO.class);
     }
 

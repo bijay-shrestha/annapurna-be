@@ -4,9 +4,6 @@ package edu.miu.annapurnabe.constant;
  * @author bijayshrestha on 6/26/22
  * @project annapurna-be
  */
-public class StringConstant {
-
-    public interface StatusConstant {
-        Character DELETE = 'D';
-    }
+public final class BooleanConstant {
+    public static final Boolean FALSE = false;
 }
