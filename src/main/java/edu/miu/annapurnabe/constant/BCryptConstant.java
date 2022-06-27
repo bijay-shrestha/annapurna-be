@@ -5,7 +5,5 @@ package edu.miu.annapurnabe.constant;
  * @project annapurna-be
  */
 public class BCryptConstant {
-
     public static final Integer COST = 12;
-
 }
