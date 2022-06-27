@@ -14,7 +14,7 @@ import java.util.Optional;
  */
 @Repository
 @Transactional(propagation = Propagation.MANDATORY)
-public interface StudentRepository extends JpaRepository<Student, Long> {
+public interface StudentRepository extends JpaRepository<Student, Integer> {
 
     @Query("SELECT s FROM Student s WHERE s.id=:id and s.status='Y'")
     Optional<Student> findById(Integer id);
