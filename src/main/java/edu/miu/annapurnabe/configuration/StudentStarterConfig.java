@@ -26,7 +26,7 @@ public class StudentStarterConfig {
             Student bijay = new Student(
                     613783,
                     "Bijay Shrestha",
-                    "bijayshrestha@miu.edu",
+                    "xyz@miu.edu",
                     "bijay",
                     BCrypt.withDefaults().hashToString(COST, "bijay".toCharArray()),
                     LocalDate.of(1990, Month.JANUARY, 5),
@@ -36,7 +36,7 @@ public class StudentStarterConfig {
             Student shelly = new Student(
                     613701,
                     "Shelly Neira",
-                    "shellyneira@miu.edu",
+                    "ssh@miu.edu",
                     "shelly",
                     BCrypt.withDefaults().hashToString(COST, "shelly".toCharArray()),
                     LocalDate.of(2015, Month.FEBRUARY, 14),
@@ -46,7 +46,7 @@ public class StudentStarterConfig {
             Student derartu = new Student(
                     613701,
                     "Derartu Abdisa",
-                    "derartu@miu.edu",
+                    "hello@miu.edu",
                     "derartu",
                     BCrypt.withDefaults().hashToString(COST, "derartu".toCharArray()),
                     LocalDate.of(2000, Month.MARCH, 10),
