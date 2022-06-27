@@ -14,6 +14,9 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 public class Student implements Serializable {
+    private static final Character DISABLE = 'D';
+    private static final Character ACTIVE = 'A';
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -30,7 +33,7 @@ public class Student implements Serializable {
     @Column(nullable = false)
     private LocalDate dateOfBirth;
     @Column(nullable = false)
-    private Character status = 'A';
+    private Character status = ACTIVE;
 
     public boolean subscribed;
 
@@ -50,5 +53,9 @@ public class Student implements Serializable {
         this.dateOfBirth = dateOfBirth;
         this.status = status;
         this.subscribed = subscribed;
+    }
+
+    public void disable(){
+        this.status = DISABLE;
     }
 }

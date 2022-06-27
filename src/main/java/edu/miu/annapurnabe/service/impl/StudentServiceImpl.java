@@ -16,7 +16,6 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import static edu.miu.annapurnabe.constant.BCryptConstant.COST;
 import static edu.miu.annapurnabe.constant.ExceptionMessageConstant.STUDENT_NOT_FOUND;
-import static edu.miu.annapurnabe.constant.StudentStatusConstant.DISABLE;
 
 /**
  * @author bijayshrestha on 6/24/22
@@ -74,7 +73,7 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public StudentResponseDTO deleteStudent(Integer id) {
         Student student = studentRepository.findById(id).orElseThrow(()-> new IllegalStateException(STUDENT_NOT_FOUND));
-        student.setStatus(DISABLE);
+        student.disable();
         student.setSubscribed(false);
         return modelMapper.map(studentRepository.save(student), StudentResponseDTO.class);
     }
