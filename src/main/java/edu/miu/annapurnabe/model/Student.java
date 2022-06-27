@@ -30,7 +30,7 @@ public class Student implements Serializable {
     @Column(nullable = false)
     private LocalDate dateOfBirth;
     @Column(nullable = false)
-    private Character status;
+    private Character status = 'A';
 
     public boolean subscribed;
 

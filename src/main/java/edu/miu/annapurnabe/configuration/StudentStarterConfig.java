@@ -30,7 +30,7 @@ public class StudentStarterConfig {
                     "bijay",
                     BCrypt.withDefaults().hashToString(COST, "bijay".toCharArray()),
                     LocalDate.of(1990, Month.JANUARY, 5),
-                    'Y',
+                    'A',
                     true);
 
             Student shelly = new Student(
@@ -40,7 +40,7 @@ public class StudentStarterConfig {
                     "shelly",
                     BCrypt.withDefaults().hashToString(COST, "shelly".toCharArray()),
                     LocalDate.of(2015, Month.FEBRUARY, 14),
-                    'Y',
+                    'A',
                     true);
 
             Student derartu = new Student(
@@ -50,7 +50,7 @@ public class StudentStarterConfig {
                     "derartu",
                     BCrypt.withDefaults().hashToString(COST, "derartu".toCharArray()),
                     LocalDate.of(2000, Month.MARCH, 10),
-                    'Y',
+                    'A',
                     true);
 
             studentRepository.saveAll(List.of(bijay, shelly, derartu));
