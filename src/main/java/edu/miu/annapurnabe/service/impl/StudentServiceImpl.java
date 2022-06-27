@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import static edu.miu.annapurnabe.constant.BCryptConstant.COST;
+import static edu.miu.annapurnabe.constant.ExceptionMessageConstant.STUDENT_NOT_FOUND;
 import static edu.miu.annapurnabe.constant.StudentStatusConstant.DISABLE;
 
 /**
@@ -49,7 +50,7 @@ public class StudentServiceImpl implements StudentService {
         if(student.isPresent()){
             return modelMapper.map(student.get(), StudentResponseDTO.class);
         }else{
-            throw new IllegalStateException("Student Not Found");
+            throw new IllegalStateException(STUDENT_NOT_FOUND);
         }
     }
 
@@ -63,17 +64,16 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public StudentResponseDTO updateStudent(Integer id, StudentUpdateRequestDTO studentUpdateRequestDTO)
-    throws Exception{
+    public StudentResponseDTO updateStudent(Integer id, StudentUpdateRequestDTO studentUpdateRequestDTO) {
         Student toBeUpdatedStudent = modelMapper.map(studentUpdateRequestDTO, Student.class);
-        Student student = studentRepository.findById(id).orElseThrow(()-> new Exception("Student Not Found"));
+        Student student = studentRepository.findById(id).orElseThrow(()-> new IllegalStateException(STUDENT_NOT_FOUND));
         studentRepository.save(updateStudent(toBeUpdatedStudent, student));
         return modelMapper.map(student, StudentResponseDTO.class);
     }
 
     @Override
-    public StudentResponseDTO deleteStudent(Integer id) throws Exception {
-        Student student = studentRepository.findById(id).orElseThrow(()-> new Exception("Student Not Found"));
+    public StudentResponseDTO deleteStudent(Integer id) {
+        Student student = studentRepository.findById(id).orElseThrow(()-> new IllegalStateException(STUDENT_NOT_FOUND));
         student.setStatus(DISABLE);
         student.setSubscribed(false);
         return modelMapper.map(studentRepository.save(student), StudentResponseDTO.class);

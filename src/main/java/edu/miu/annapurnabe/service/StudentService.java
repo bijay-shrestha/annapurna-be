@@ -17,7 +17,7 @@ public interface StudentService {
 
     StudentResponseDTO registerStudent(StudentRequestDTO studentRequestDTO);
 
-    StudentResponseDTO updateStudent(Integer id, StudentUpdateRequestDTO studentRequestDTO) throws Exception;
+    StudentResponseDTO updateStudent(Integer id, StudentUpdateRequestDTO studentRequestDTO);
 
-    StudentResponseDTO deleteStudent(Integer id) throws Exception;
+    StudentResponseDTO deleteStudent(Integer id);
 }

@@ -45,15 +45,13 @@ public class StudentResource {
 
     @PutMapping(STUDENT_ID)
     public ResponseEntity<StudentResponseDTO> updateStudent(@PathVariable("studentId") Integer id,
-                                           @RequestBody StudentUpdateRequestDTO studentUpdateRequestDTO)
-            throws Exception{
+                                           @RequestBody StudentUpdateRequestDTO studentUpdateRequestDTO) {
         StudentResponseDTO studentResponseDTO = studentService.updateStudent(id, studentUpdateRequestDTO);
         return ResponseEntity.ok().body(studentResponseDTO);
     }
 
     @DeleteMapping(STUDENT_ID)
-    public ResponseEntity<StudentResponseDTO> deleteStudent(@PathVariable("studentId") Integer id)
-            throws Exception{
+    public ResponseEntity<StudentResponseDTO> deleteStudent(@PathVariable("studentId") Integer id) {
         StudentResponseDTO studentToBeDeleted = studentService.deleteStudent(id);
         return ResponseEntity.ok().body(studentToBeDeleted);
     }
