@@ -11,10 +11,13 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
 import static edu.miu.annapurnabe.constant.BCryptConstant.COST;
+import static edu.miu.annapurnabe.constant.ExceptionMessageConstant.STUDENT_ALREADY_EXIST;
 import static edu.miu.annapurnabe.constant.ExceptionMessageConstant.STUDENT_NOT_FOUND;
 
 /**
@@ -46,15 +49,22 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public StudentResponseDTO getStudentById(Integer studentId) {
         Optional<Student> student = studentRepository.findById(studentId);
-        if(student.isPresent()){
+        if (student.isPresent()) {
             return modelMapper.map(student.get(), StudentResponseDTO.class);
-        }else{
+        } else {
             throw new IllegalStateException(STUDENT_NOT_FOUND);
         }
     }
 
     @Override
     public StudentResponseDTO registerStudent(StudentRequestDTO studentRequestDTO) {
+        Optional<Student> isStudentExist = studentRepository.findByStudentIdOrUsernameOrEmail(
+                studentRequestDTO.getStudentId(),
+                studentRequestDTO.getEmail(),
+                studentRequestDTO.getUsername());
+        if(isStudentExist.isPresent()){
+            throw new IllegalStateException(STUDENT_ALREADY_EXIST);
+        }
         Student studentRequest = modelMapper.map(studentRequestDTO, Student.class);
         studentRequest.setPassword(BCrypt.withDefaults().hashToString(COST,
                 studentRequest.getPassword().toCharArray()));
@@ -65,20 +75,20 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public StudentResponseDTO updateStudent(Integer id, StudentUpdateRequestDTO studentUpdateRequestDTO) {
         Student toBeUpdatedStudent = modelMapper.map(studentUpdateRequestDTO, Student.class);
-        Student student = studentRepository.findById(id).orElseThrow(()-> new IllegalStateException(STUDENT_NOT_FOUND));
+        Student student = studentRepository.findById(id).orElseThrow(() -> new IllegalStateException(STUDENT_NOT_FOUND));
         studentRepository.save(updateStudent(toBeUpdatedStudent, student));
         return modelMapper.map(student, StudentResponseDTO.class);
     }
 
     @Override
     public StudentResponseDTO deleteStudent(Integer id) {
-        Student student = studentRepository.findById(id).orElseThrow(()-> new IllegalStateException(STUDENT_NOT_FOUND));
+        Student student = studentRepository.findById(id).orElseThrow(() -> new IllegalStateException(STUDENT_NOT_FOUND));
         student.disable();
         student.setSubscribed(false);
         return modelMapper.map(studentRepository.save(student), StudentResponseDTO.class);
     }
 
-    protected Student updateStudent(Student toBeUpdatedStudent, Student existingStudent){
+    protected Student updateStudent(Student toBeUpdatedStudent, Student existingStudent) {
         existingStudent.setFullName(toBeUpdatedStudent.getFullName());
         existingStudent.setEmail(toBeUpdatedStudent.getEmail());
         existingStudent.setDateOfBirth(toBeUpdatedStudent.getDateOfBirth());
