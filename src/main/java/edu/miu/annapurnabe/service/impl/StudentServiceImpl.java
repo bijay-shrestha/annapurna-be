@@ -36,7 +36,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public List<StudentResponseDTO> getStudents() {
-        return studentRepository.findAll().stream()
+        return studentRepository.getAllActiveStudents().stream()
                 .map(student -> modelMapper.map(
                         student,
                         StudentResponseDTO.class))
@@ -74,7 +74,7 @@ public class StudentServiceImpl implements StudentService {
     public StudentResponseDTO deleteStudent(Integer id) {
         Student student = studentRepository.findById(id).orElseThrow(()-> new IllegalStateException(STUDENT_NOT_FOUND));
         student.disable();
-        student.setSubscribed(false);
+        student.setSubscribe(false);
         return modelMapper.map(studentRepository.save(student), StudentResponseDTO.class);
     }
 
@@ -83,7 +83,7 @@ public class StudentServiceImpl implements StudentService {
         existingStudent.setEmail(toBeUpdatedStudent.getEmail());
         existingStudent.setDateOfBirth(toBeUpdatedStudent.getDateOfBirth());
         existingStudent.setStatus(toBeUpdatedStudent.getStatus());
-        existingStudent.setSubscribed(toBeUpdatedStudent.isSubscribed());
+        existingStudent.setSubscribe(toBeUpdatedStudent.isSubscribe());
         return existingStudent;
     }
 }

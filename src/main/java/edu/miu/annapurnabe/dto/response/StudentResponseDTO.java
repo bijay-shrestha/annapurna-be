@@ -20,5 +20,5 @@ public class StudentResponseDTO implements Serializable {
     private String username;
     private LocalDate dateOfBirth;
     private Character status;
-    private boolean subscribed;
+    private boolean subscribe;
 }

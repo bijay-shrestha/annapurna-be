@@ -6,6 +6,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -16,6 +19,9 @@ import java.util.Optional;
 @Transactional(propagation = Propagation.MANDATORY)
 public interface StudentRepository extends JpaRepository<Student, Integer> {
 
-    @Query("SELECT s FROM Student s WHERE s.id=:id and s.status='A'")
+    @Query("SELECT s FROM Student s WHERE s.id=:id AND s.status='A'")
     Optional<Student> findById(Integer id);
+    
+    @Query("SELECT s FROM Student s WHERE s.status='A'")
+    Collection<Student> getAllActiveStudents();
 }

@@ -1,6 +1,7 @@
 package edu.miu.annapurnabe.model;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.io.Serializable;
@@ -13,29 +14,16 @@ import java.time.LocalDate;
 @Entity
 @Data
 @NoArgsConstructor
-public class Student implements Serializable {
-    private static final Character DISABLE = 'D';
-    private static final Character ACTIVE = 'A';
-
+public class Student extends User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column(nullable = false)
     private Integer studentId;
-    @Column(nullable = false, length = 100)
-    private String fullName;
-    @Column(nullable = false, length = 100)
-    private String email;
-    @Column(nullable = false, length = 20)
-    private String username;
-    @Column(nullable = false)
-    private String password;
     @Column(nullable = false)
     private LocalDate dateOfBirth;
-    @Column(nullable = false)
-    private Character status = ACTIVE;
-
-    public boolean subscribed;
+    @Column(name = "subscribe")
+    private boolean subscribe;
 
     public Student(Integer studentId,
                    String fullName,
@@ -44,18 +32,11 @@ public class Student implements Serializable {
                    String password,
                    LocalDate dateOfBirth,
                    Character status,
-                   boolean subscribed) {
+                   boolean subscribe) {
+        super(fullName, email, username, password, status);
         this.studentId = studentId;
-        this.fullName = fullName;
-        this.email = email;
-        this.username = username;
-        this.password = password;
         this.dateOfBirth = dateOfBirth;
-        this.status = status;
-        this.subscribed = subscribed;
+        this.subscribe = subscribe;
     }
 
-    public void disable(){
-        this.status = DISABLE;
-    }
 }
