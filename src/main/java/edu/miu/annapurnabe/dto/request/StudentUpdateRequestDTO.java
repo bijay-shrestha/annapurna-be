@@ -14,5 +14,5 @@ public class StudentUpdateRequestDTO implements Serializable {
     private String email;
     private LocalDate dateOfBirth;
     private Character status;
-    private boolean subscribe;
+    private boolean subscribed;
 }

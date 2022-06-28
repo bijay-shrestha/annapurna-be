@@ -22,8 +22,8 @@ public class Student extends User implements Serializable {
     private Integer studentId;
     @Column(nullable = false)
     private LocalDate dateOfBirth;
-    @Column(name = "subscribe")
-    private boolean subscribe;
+    @Column(name = "subscribed")
+    private boolean subscribed;
 
     public Student(Integer studentId,
                    String fullName,
@@ -32,11 +32,11 @@ public class Student extends User implements Serializable {
                    String password,
                    LocalDate dateOfBirth,
                    Character status,
-                   boolean subscribe) {
+                   boolean subscribed) {
         super(fullName, email, username, password, status);
         this.studentId = studentId;
         this.dateOfBirth = dateOfBirth;
-        this.subscribe = subscribe;
+        this.subscribed = subscribed;
     }
 
 }

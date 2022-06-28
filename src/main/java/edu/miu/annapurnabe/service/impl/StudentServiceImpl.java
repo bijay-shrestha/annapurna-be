@@ -74,7 +74,7 @@ public class StudentServiceImpl implements StudentService {
     public StudentResponseDTO deleteStudent(Integer id) {
         Student student = studentRepository.findById(id).orElseThrow(()-> new IllegalStateException(STUDENT_NOT_FOUND));
         student.disable();
-        student.setSubscribe(false);
+        student.setSubscribed(false);
         return modelMapper.map(studentRepository.save(student), StudentResponseDTO.class);
     }
 
@@ -83,7 +83,7 @@ public class StudentServiceImpl implements StudentService {
         existingStudent.setEmail(toBeUpdatedStudent.getEmail());
         existingStudent.setDateOfBirth(toBeUpdatedStudent.getDateOfBirth());
         existingStudent.setStatus(toBeUpdatedStudent.getStatus());
-        existingStudent.setSubscribe(toBeUpdatedStudent.isSubscribe());
+        existingStudent.setSubscribed(toBeUpdatedStudent.isSubscribed());
         return existingStudent;
     }
 }
