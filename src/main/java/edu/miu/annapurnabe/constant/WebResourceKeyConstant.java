@@ -12,4 +12,9 @@ public class WebResourceKeyConstant {
         String STUDENT_BASE = "/students";
         String STUDENT_ID = "/{studentId}";
     }
+
+    public interface MealResourceConstant{
+        String MEAL_BASE="/meals";
+        String MEAL_ID="/{mealId}";
+    }
 }
