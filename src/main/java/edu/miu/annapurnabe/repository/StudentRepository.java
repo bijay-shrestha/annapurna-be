@@ -24,4 +24,7 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
     
     @Query("SELECT s FROM Student s WHERE s.status='A'")
     Collection<Student> getAllActiveStudents();
+
+    @Query("SELECT s FROM Student s WHERE s.studentId=:studentId OR s.email=:email OR s.username=:username")
+    Optional<Student> findByStudentIdOrUsernameOrEmail(Integer studentId, String email, String username);
 }
