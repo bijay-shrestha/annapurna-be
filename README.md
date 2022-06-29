@@ -1,5 +1,7 @@
 # annapurna-be
 
+This is the `backend (be)` side of the `Annapurna Rating System` application. The Project is build under the supervision of **Professor Obinna Kalu** from [Maharishi International University](https://miu.edu).
+
 # Contributors
 - ## Shelly Neira <img alt="Brazil Flag" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Brazilian_flag_icon_round.svg/1200px-Brazilian_flag_icon_round.svg.png" width="16" height="16">
 - ## Derartu Abdisa <img alt="Etheopia Flag" src="https://upload.wikimedia.org/wikipedia/commons/d/de/Flag_of_Ethiopia.jpg" width="16" height="16">
