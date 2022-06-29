@@ -3,7 +3,9 @@ package edu.miu.annapurnabe.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
+import java.time.LocalDate;
 
 /**
  * @author bijayshrestha on 6/28/22
@@ -13,25 +15,22 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Meal {
-    private static final Character DISABLE = 'D';
-    private static final Character ACTIVE = 'A';
-
+public class DailyMeal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "name")
-    private String name;
+    @ManyToOne
+    private DineType dineType;
 
-    @Column(name="status")
-    private Character status = ACTIVE;
+    @ManyToOne
+    private Meal meal;
 
-    public Meal(String name) {
-        this.name = name;
-    }
+    private LocalDate date;
 
-    public void disable(){
-        this.status = DISABLE;
+    public DailyMeal(DineType dineType, Meal meal, LocalDate date) {
+        this.dineType = dineType;
+        this.meal = meal;
+        this.date = date;
     }
 }

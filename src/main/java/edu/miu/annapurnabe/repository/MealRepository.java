@@ -19,4 +19,7 @@ public interface MealRepository extends JpaRepository<Meal, Integer> {
 
     @Query("SELECT m FROM Meal m  WHERE m.id=:mealId AND m.status='A'")
     Optional<Meal> findById(Integer mealId);
+
+    @Query("SELECT m FROM Meal m  WHERE m.name=:name AND m.status='A'")
+    Optional<Meal> findByName(String name);
 }

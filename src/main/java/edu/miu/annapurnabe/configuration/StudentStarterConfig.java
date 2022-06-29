@@ -3,6 +3,7 @@ package edu.miu.annapurnabe.configuration;
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import edu.miu.annapurnabe.model.Student;
 import edu.miu.annapurnabe.repository.StudentRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,12 +23,15 @@ import static edu.miu.annapurnabe.constant.BCryptConstant.COST;
  */
 @Order(value = 1)
 @Component
+@Slf4j
 public class StudentStarterConfig implements CommandLineRunner{
     @Resource
     private StudentRepository studentRepository;
 
     @Override
     public void run(String... args) throws Exception {
+
+        log.info("--------- RUNNING STUDENT STARTER CONFIG 1 ----------------");
 
         Student bijay = new Student(
                 613783,
