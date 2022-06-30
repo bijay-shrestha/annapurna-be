@@ -3,7 +3,11 @@ package edu.miu.annapurnabe.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import javax.persistence.*;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  * @author bijayshrestha on 6/28/22
@@ -12,26 +16,13 @@ import javax.persistence.*;
 @Entity
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
-public class Meal {
-    private static final Character DISABLE = 'D';
-    private static final Character ACTIVE = 'A';
-
+public class DineType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
-    @Column(name = "name")
     private String name;
 
-    @Column(name="status")
-    private Character status = ACTIVE;
-
-    public Meal(String name) {
+    public DineType(String name) {
         this.name = name;
-    }
-
-    public void disable(){
-        this.status = DISABLE;
     }
 }

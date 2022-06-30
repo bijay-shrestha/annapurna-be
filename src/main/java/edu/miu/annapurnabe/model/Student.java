@@ -1,7 +1,7 @@
 package edu.miu.annapurnabe.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.io.Serializable;
@@ -14,6 +14,7 @@ import java.time.LocalDate;
 @Entity
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class Student extends User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
