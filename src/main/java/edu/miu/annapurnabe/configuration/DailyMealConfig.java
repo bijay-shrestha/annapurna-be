@@ -46,7 +46,7 @@ public class DailyMealConfig implements CommandLineRunner {
 
 
         Meal potatoes = mealRepository.findByName("Potatoes")
-                .orElseThrow(()->new IllegalStateException("Potatoes doesn't exist"));;
+                .orElseThrow(()->new IllegalStateException("Potatoes doesn't exist"));
         Meal egg = mealRepository.findByName("Egg")
                 .orElseThrow(()->new IllegalStateException("Egg doesn't exist"));
         Meal milk = mealRepository.findByName("Milk")
