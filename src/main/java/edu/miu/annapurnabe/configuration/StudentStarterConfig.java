@@ -5,15 +5,13 @@ import edu.miu.annapurnabe.model.Student;
 import edu.miu.annapurnabe.repository.StudentRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-
 import javax.annotation.Resource;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.List;
+
 import static edu.miu.annapurnabe.constant.BCryptConstant.COST;
 
 /**
