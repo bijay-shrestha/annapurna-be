@@ -19,7 +19,7 @@ import java.util.List;
  * @project annapurna-be
  */
 //TODO: Needs Refactoring
-@Order(value = 4)
+@Order(value = 5)
 @Component
 @Slf4j
 public class DailyMealConfig implements CommandLineRunner {
@@ -35,7 +35,7 @@ public class DailyMealConfig implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        log.info("--------- RUNNING DAILY MEAL CONFIG 4 ----------------");
+        log.info("--------- RUNNING DAILY MEAL CONFIG 5 ----------------");
 
         DineType breakFast = dineTypeRepository.findByName("Breakfast")
                 .orElseThrow(()->new IllegalStateException("Breakfast doesn't exist"));

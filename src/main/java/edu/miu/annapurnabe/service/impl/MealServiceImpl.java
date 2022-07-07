@@ -4,6 +4,8 @@ import edu.miu.annapurnabe.dto.request.MealRequestDTO;
 import edu.miu.annapurnabe.dto.request.MealUpdateRequestDTO;
 import edu.miu.annapurnabe.dto.response.MealResponseDTO;
 import edu.miu.annapurnabe.model.Meal;
+import edu.miu.annapurnabe.model.MealCourse;
+import edu.miu.annapurnabe.repository.MealCourseRepository;
 import edu.miu.annapurnabe.repository.MealRepository;
 import edu.miu.annapurnabe.service.MealService;
 import org.modelmapper.ModelMapper;
@@ -21,10 +23,12 @@ import static edu.miu.annapurnabe.constant.ExceptionMessageConstant.MEAL_NOT_FOU
 public class MealServiceImpl implements MealService {
 
     private final MealRepository mealRepository;
+    private final MealCourseRepository mealCourseRepository;
     private final ModelMapper modelMapper;
 
-    public MealServiceImpl(MealRepository mealRepository, ModelMapper modelMapper) {
+    public MealServiceImpl(MealRepository mealRepository, MealCourseRepository mealCourseRepository, ModelMapper modelMapper) {
         this.mealRepository = mealRepository;
+        this.mealCourseRepository = mealCourseRepository;
         this.modelMapper = modelMapper;
     }
 
@@ -49,7 +53,10 @@ public class MealServiceImpl implements MealService {
 
     @Override
     public MealResponseDTO saveMeal(MealRequestDTO mealRequestDTO) {
+        MealCourse mealCourse = mealCourseRepository.findById(mealRequestDTO.getMealCourseId())
+                .orElseThrow(()-> new IllegalArgumentException("Requested Meal Course is not available."));
         Meal mealRequest = modelMapper.map(mealRequestDTO, Meal.class);
+        mealRequest.setMealCourse(mealCourse);
         Meal meal = mealRepository.save(mealRequest);
         return modelMapper.map(meal, MealResponseDTO.class);
     }

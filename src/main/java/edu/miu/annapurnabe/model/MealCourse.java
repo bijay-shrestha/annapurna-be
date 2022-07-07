@@ -1,19 +1,22 @@
 package edu.miu.annapurnabe.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import javax.persistence.*;
+import lombok.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
- * @author bijayshrestha on 6/28/22
+ * @author bijayshrestha on 7/7/22
  * @project annapurna-be
  */
 @Entity
-@Data
+@Getter
+@Setter
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class Meal {
+public class MealCourse {
     private static final Character DISABLE = 'D';
     private static final Character ACTIVE = 'A';
 
@@ -21,18 +24,12 @@ public class Meal {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "name")
     private String name;
 
-    @ManyToOne
-    private MealCourse mealCourse;
-
-    @Column(name="status")
     private Character status = ACTIVE;
 
-    public Meal(String name, MealCourse mealCourse) {
+    public MealCourse(String name) {
         this.name = name;
-        this.mealCourse = mealCourse;
     }
 
     public void disable(){
