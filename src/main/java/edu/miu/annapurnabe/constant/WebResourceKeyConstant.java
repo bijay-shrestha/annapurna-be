@@ -23,4 +23,8 @@ public class WebResourceKeyConstant {
         String RATING_BASE="/ratings";
         String RATING_ID="/{ratingId}";
     }
+
+    public interface LoginResourceConstant{
+        String REFRESH_TOKEN="/token/refresh";
+    }
 }

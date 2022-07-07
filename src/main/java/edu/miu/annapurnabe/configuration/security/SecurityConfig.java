@@ -45,6 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/api/v1/test").permitAll();
         http.authorizeRequests().antMatchers("/api/v1/login/**", "/api/v1/token/refresh/**").permitAll();
         http.authorizeRequests().antMatchers(POST, "/api/v1/ratings/**").hasAnyAuthority("STUDENT");
+        //TODO: REMOVE THESE :: THIS IS JUST FOR TESTING
         http.authorizeRequests().antMatchers(GET, "/api/v1/ratings/**").hasAnyAuthority("ADMIN");
         http.authorizeRequests().antMatchers(GET, "/api/v1/students/**").hasAnyAuthority("ADMIN");
         http.authorizeRequests().anyRequest().authenticated();

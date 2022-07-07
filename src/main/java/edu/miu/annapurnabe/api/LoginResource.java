@@ -7,18 +7,23 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.miu.annapurnabe.constant.WebResourceKeyConstant;
 import edu.miu.annapurnabe.model.User;
+import edu.miu.annapurnabe.model.UserRole;
 import edu.miu.annapurnabe.repository.UserRepository;
 import edu.miu.annapurnabe.service.LoginService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
+
+import static edu.miu.annapurnabe.constant.ExceptionMessageConstant.USER_NOT_FOUND;
+import static edu.miu.annapurnabe.constant.WebResourceKeyConstant.LoginResourceConstant.REFRESH_TOKEN;
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static org.springframework.http.HttpStatus.FORBIDDEN;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -38,25 +43,24 @@ public class LoginResource {
         this.userRepository = userRepository;
     }
 
-    @GetMapping("/login/token/refresh")
+    @GetMapping(REFRESH_TOKEN)
     public void refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String authorizationHeader = request.getHeader(AUTHORIZATION);
         if(authorizationHeader != null && authorizationHeader.startsWith("Bearer ")){
 
             try {
                 String refresh_token = authorizationHeader.substring("Bearer ".length());
-                //MAKE SURE THE SECRET IS THE SAME, WHEN AUTHENTICATING
                 Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());
                 JWTVerifier verifier = JWT.require(algorithm).build();
                 DecodedJWT decodedJWT = verifier.verify(refresh_token);
                 String username = decodedJWT.getSubject();
-                User user = userRepository.findByUsername(username).get();
+                User user = userRepository.findByUsername(username).orElseThrow(()->  new Exception(USER_NOT_FOUND));
                 String access_token = JWT.create()
                         .withSubject(user.getUsername())
                         .withExpiresAt(new Date(System.currentTimeMillis() + 10 * 60 * 1000))
                         .withIssuer(request.getRequestURL().toString())
-                        //TODO: NO CLAIMS RIGHT NOW
-                        .withClaim("roles", new ArrayList<>())
+                        .withClaim("roles", user.getUserRoles()
+                                .stream().map(UserRole::getName).collect(Collectors.toList()))
                         .sign(algorithm);
 
                 Map<String, String> tokens = new HashMap<>();
