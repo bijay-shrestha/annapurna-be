@@ -8,9 +8,9 @@ public class WebResourceKeyConstant {
 
     public static final String API_V1_BASE = "/api/v1";
 
-    public interface StudentResourceConstant{
-        String STUDENT_BASE = "/students";
-        String STUDENT_ID = "/{studentId}";
+    public interface UserResourceConstant {
+        String USER_BASE = "/users";
+        String USER_ID = "/{userId}";
     }
 
     public interface MealResourceConstant{

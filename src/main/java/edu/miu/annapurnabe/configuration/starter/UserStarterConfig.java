@@ -1,18 +1,18 @@
-package edu.miu.annapurnabe.configuration;
+package edu.miu.annapurnabe.configuration.starter;
 
-import at.favre.lib.crypto.bcrypt.BCrypt;
-import edu.miu.annapurnabe.model.Student;
-import edu.miu.annapurnabe.repository.StudentRepository;
+import edu.miu.annapurnabe.model.User;
+import edu.miu.annapurnabe.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+
 import javax.annotation.Resource;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.List;
-
-import static edu.miu.annapurnabe.constant.BCryptConstant.COST;
 
 /**
  * @author bijayshrestha on 6/24/22
@@ -22,44 +22,47 @@ import static edu.miu.annapurnabe.constant.BCryptConstant.COST;
 @Order(value = 1)
 @Component
 @Slf4j
-public class StudentStarterConfig implements CommandLineRunner{
+public class UserStarterConfig implements CommandLineRunner {
     @Resource
-    private StudentRepository studentRepository;
+    private UserRepository userRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public void run(String... args) throws Exception {
 
         log.info("--------- RUNNING STUDENT STARTER CONFIG 1 ----------------");
 
-        Student bijay = new Student(
+        User bijay = new User(
                 613783,
                 "Bijay Shrestha",
                 "xyz@miu.edu",
                 "bijay",
-                BCrypt.withDefaults().hashToString(COST, "bijay".toCharArray()),
+                passwordEncoder.encode("bijay"),
                 LocalDate.of(1990, Month.JANUARY, 5),
-                'A',
-                true);
+                true,
+                'A');
 
-        Student shelly = new Student(
+        User shelly = new User(
                 613701,
                 "Shelly Neira",
                 "ssh@miu.edu",
                 "shelly",
-                BCrypt.withDefaults().hashToString(COST, "shelly".toCharArray()),
+                passwordEncoder.encode("shelly"),
                 LocalDate.of(2015, Month.FEBRUARY, 14),
-                'A',
-                true);
+                true,
+                'A');
 
-        Student derartu = new Student(
+        User derartu = new User(
                 613701,
                 "Derartu Abdisa",
                 "hello@miu.edu",
                 "derartu",
-                BCrypt.withDefaults().hashToString(COST, "derartu".toCharArray()),
+                passwordEncoder.encode("derartu"),
                 LocalDate.of(2000, Month.MARCH, 10),
-                'A',
-                true);
-        studentRepository.saveAll(List.of(bijay, shelly, derartu));
+                true,
+                'A');
+        userRepository.saveAll(List.of(bijay, shelly, derartu));
     }
 }

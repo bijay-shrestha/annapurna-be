@@ -9,8 +9,8 @@ import java.time.LocalDate;
  * @project annapurna-be
  */
 @Data
-public class StudentRequestDTO implements Serializable {
-    private Integer studentId;
+public class UserResponseDTO implements Serializable {
+    private Integer userId;
     private String fullName;
     private String email;
     private String username;

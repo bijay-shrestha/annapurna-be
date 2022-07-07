@@ -1,23 +1,36 @@
 package edu.miu.annapurnabe.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import javax.persistence.Column;
-import javax.persistence.MappedSuperclass;
+import lombok.*;
+
+import javax.persistence.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collection;
+
+import static javax.persistence.FetchType.EAGER;
 
 /**
  * @author bijayshrestha on 6/28/22
  * @project annapurna-be
  */
-@Data
+
+
+@Entity
+@Getter
+@Setter
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
-@MappedSuperclass
+@Table(name = "users")
 public class User {
     private static final Character DISABLE = 'D';
     private static final Character ACTIVE = 'A';
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    @Column(nullable = false)
+    private Integer userId;
     @Column(name = "full_name", nullable = false)
     private String fullName;
     @Column(name="email", nullable = false)
@@ -26,10 +39,28 @@ public class User {
     private String username;
     @Column(name = "password", nullable = false)
     private String password;
+    @Column(nullable = false)
+    private LocalDate dateOfBirth;
+    @Column(name = "subscribed")
+    private boolean subscribed;
     @Column(name = "status")
     private Character status = ACTIVE;
 
     public void disable(){
         this.status = DISABLE;
+    }
+
+    public User(Integer userId, String fullName,
+                String email, String username,
+                String password, LocalDate dateOfBirth,
+                boolean subscribed, Character status) {
+        this.userId = userId;
+        this.fullName = fullName;
+        this.email = email;
+        this.username = username;
+        this.password = password;
+        this.dateOfBirth = dateOfBirth;
+        this.subscribed = subscribed;
+        this.status = status;
     }
 }
