@@ -1,4 +1,4 @@
-package edu.miu.annapurnabe.api;
+package edu.miu.annapurnabe.api.v1;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
