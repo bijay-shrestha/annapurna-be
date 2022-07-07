@@ -7,6 +7,7 @@ package edu.miu.annapurnabe.constant;
 public class WebResourceKeyConstant {
 
     public static final String API_V1_BASE = "/api/v1";
+    public static final String TEST = "/test";
 
     public interface UserResourceConstant {
         String USER_BASE = "/users";
@@ -16,5 +17,10 @@ public class WebResourceKeyConstant {
     public interface MealResourceConstant{
         String MEAL_BASE="/meals";
         String MEAL_ID="/{mealId}";
+    }
+
+    public interface RatingResourceConstant{
+        String RATING_BASE="/ratings";
+        String RATING_ID="/{ratingId}";
     }
 }

@@ -38,12 +38,6 @@ public class LoginResource {
         this.userRepository = userRepository;
     }
 
-    @GetMapping("/test")
-    public String test() {
-        return "test done";
-    }
-
-
     @GetMapping("/login/token/refresh")
     public void refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String authorizationHeader = request.getHeader(AUTHORIZATION);

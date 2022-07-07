@@ -6,6 +6,9 @@ import edu.miu.annapurnabe.model.User;
 import edu.miu.annapurnabe.repository.UserRepository;
 import edu.miu.annapurnabe.service.UserService;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -94,4 +97,5 @@ public class UserServiceImpl implements UserService {
         existingUser.setSubscribed(toBeUpdatedUser.isSubscribed());
         return existingUser;
     }
+
 }

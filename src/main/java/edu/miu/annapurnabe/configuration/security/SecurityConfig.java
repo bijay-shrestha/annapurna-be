@@ -1,6 +1,7 @@
 package edu.miu.annapurnabe.configuration.security;
 
 import edu.miu.annapurnabe.configuration.security.filter.CustomAuthenticationFilter;
+import edu.miu.annapurnabe.configuration.security.filter.CustomAuthorizationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,6 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import static org.springframework.http.HttpMethod.GET;
+import static org.springframework.http.HttpMethod.POST;
 
 /**
  * @author bijayshrestha on 7/6/22
@@ -42,11 +44,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.authorizeRequests().antMatchers("/api/v1/test").permitAll();
         http.authorizeRequests().antMatchers("/api/v1/login/**", "/api/v1/token/refresh/**").permitAll();
-//        http.authorizeRequests().antMatchers(GET, "/api/v1/rating/**").hasAnyAuthority("STUDENT");
-//        http.authorizeRequests().antMatchers(GET, "/api/v1/students/**").hasAnyAuthority("ADMIN");
+        http.authorizeRequests().antMatchers(POST, "/api/v1/ratings/**").hasAnyAuthority("STUDENT");
+        http.authorizeRequests().antMatchers(GET, "/api/v1/ratings/**").hasAnyAuthority("ADMIN");
+        http.authorizeRequests().antMatchers(GET, "/api/v1/students/**").hasAnyAuthority("ADMIN");
         http.authorizeRequests().anyRequest().authenticated();
-        http.addFilter( new CustomAuthenticationFilter(authenticationManagerBean()));
-        http.addFilterBefore(customAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+        http.addFilter(customAuthenticationFilter);
+        http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 
     @Bean

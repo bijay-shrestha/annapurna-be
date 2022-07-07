@@ -6,6 +6,8 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 import static javax.persistence.FetchType.EAGER;
 
@@ -46,6 +48,9 @@ public class User {
     @Column(name = "status")
     private Character status = ACTIVE;
 
+    @ManyToMany(fetch = EAGER)
+    private Set<UserRole> userRoles = new HashSet<>();
+
     public void disable(){
         this.status = DISABLE;
     }
@@ -62,5 +67,19 @@ public class User {
         this.dateOfBirth = dateOfBirth;
         this.subscribed = subscribed;
         this.status = status;
+    }
+
+    public User(Integer userId, String fullName, String email, String username,
+                String password, LocalDate dateOfBirth, boolean subscribed,
+                Character status, Set<UserRole> userRoles) {
+        this.userId = userId;
+        this.fullName = fullName;
+        this.email = email;
+        this.username = username;
+        this.password = password;
+        this.dateOfBirth = dateOfBirth;
+        this.subscribed = subscribed;
+        this.status = status;
+        this.userRoles = userRoles;
     }
 }
