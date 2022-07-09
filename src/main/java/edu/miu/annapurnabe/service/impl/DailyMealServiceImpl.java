@@ -15,8 +15,10 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static edu.miu.annapurnabe.DailyMealUtils.convertObjectListToResponse;
+import static edu.miu.annapurnabe.constant.MealConstants.*;
 
 /**
  * @author bijayshrestha on 7/7/22
@@ -37,9 +39,9 @@ public class DailyMealServiceImpl implements DailyMealService {
 
     @Override
     public List<DailyMealResponseDTO> getTodayMeal(DailyMealRequestDTO dailyMealRequestDTO) throws DataNotFoundException {
-
         List<DailyMealResponseDTO> meals= new ArrayList<>();
-        List<DineType> dineTypes = dineTypeRepository.findAll();
+        List<DineType> dineTypes = Optional.of(dineTypeRepository.findAll()).orElseThrow(()->
+                new DataNotFoundException("Dine Type Not Found!", "Dine Type returned null!"));
         dineTypes.forEach(dineType->{
             DailyMealResponseDTO mealResponseDTO = new DailyMealResponseDTO();
             mealResponseDTO.setCategory(dineType.getName());
@@ -51,26 +53,20 @@ public class DailyMealServiceImpl implements DailyMealService {
 
     private DailyMealDetailResponseDTO fetchDailyMealResponse(DailyMealRequestDTO dailyMealRequestDTO, String dineType) {
         DailyMealDetailResponseDTO dailyMealDetailResponseDTO = new DailyMealDetailResponseDTO();
-        List<Object[]> fruits =  dailyMealRepository
-                .getTodayMeal(dailyMealRequestDTO.getTodayDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")), "fruits", dineType);
-        List<MealResponseDetailDTO> fruitsObj = convertObjectListToResponse.apply(fruits);
-        dailyMealDetailResponseDTO.setFruits(fruitsObj);
+        String today = dailyMealRequestDTO.getTodayDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        List<MealResponseDetailDTO> fruits = convertObjectListToResponse.apply(dailyMealRepository
+                .getTodayMeal(today, FRUITS, dineType));
+        List<MealResponseDetailDTO> dessert = convertObjectListToResponse.apply(dailyMealRepository
+                .getTodayMeal(today,DESSERT, dineType));
+        List<MealResponseDetailDTO> main = convertObjectListToResponse.apply(dailyMealRepository
+                .getTodayMeal(today,MAIN, dineType));
+        List<MealResponseDetailDTO> soup = convertObjectListToResponse.apply(dailyMealRepository
+                .getTodayMeal(today, SOUPS, dineType));
 
-        List<Object[]> dessert =  dailyMealRepository
-                .getTodayMeal(dailyMealRequestDTO.getTodayDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")),"dessert", dineType);
-        List<MealResponseDetailDTO> desertObj = convertObjectListToResponse.apply(dessert);
-        dailyMealDetailResponseDTO.setDessert(desertObj);
-
-        List<Object[]> main =  dailyMealRepository
-                .getTodayMeal(dailyMealRequestDTO.getTodayDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")),"main", dineType);
-        List<MealResponseDetailDTO> mainObj = convertObjectListToResponse.apply(main);
-        dailyMealDetailResponseDTO.setMain(mainObj);
-
-        List<Object[]> soup =  dailyMealRepository
-                .getTodayMeal(dailyMealRequestDTO.getTodayDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")),"soup", dineType);
-        List<MealResponseDetailDTO> soupObj = convertObjectListToResponse.apply(soup);
-        dailyMealDetailResponseDTO.setSoup(soupObj);
-
+        dailyMealDetailResponseDTO.setFruits(fruits);
+        dailyMealDetailResponseDTO.setDessert(dessert);
+        dailyMealDetailResponseDTO.setMain(main);
+        dailyMealDetailResponseDTO.setSoup(soup);
         return dailyMealDetailResponseDTO;
 
     }
