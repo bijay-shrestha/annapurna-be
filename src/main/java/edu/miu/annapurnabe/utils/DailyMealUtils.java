@@ -1,4 +1,4 @@
-package edu.miu.annapurnabe;
+package edu.miu.annapurnabe.utils;
 
 import edu.miu.annapurnabe.dto.response.MealResponseDetailDTO;
 
@@ -12,8 +12,8 @@ import java.util.function.Function;
  */
 public class DailyMealUtils {
 
-    public static Function<List<Object[]>, List<MealResponseDetailDTO>>
-            convertObjectListToResponse = (objects) -> {
+    public static final Function<List<Object[]>, List<MealResponseDetailDTO>>
+            convertObjectListToResponse = objects -> {
 
         final Integer DAILY_MEAL_ID = 0;
         final Integer MEAL_NAME = 1;
@@ -36,5 +36,9 @@ public class DailyMealUtils {
 
         return responseDTOList;
     };
+
+    private DailyMealUtils() {
+        throw new IllegalStateException("Must Not Initialize Utility class");
+    }
 
 }

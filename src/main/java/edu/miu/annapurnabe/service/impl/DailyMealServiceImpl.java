@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static edu.miu.annapurnabe.DailyMealUtils.convertObjectListToResponse;
+import static edu.miu.annapurnabe.utils.DailyMealUtils.convertObjectListToResponse;
 import static edu.miu.annapurnabe.constant.MealConstants.*;
 
 /**
