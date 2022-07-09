@@ -3,6 +3,7 @@ package edu.miu.annapurnabe.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * @author bijayshrestha on 7/6/22
@@ -15,7 +16,7 @@ import javax.persistence.*;
 @Setter
 @ToString
 @Table(name="user_roles")
-public class UserRole {
+public class UserRole implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

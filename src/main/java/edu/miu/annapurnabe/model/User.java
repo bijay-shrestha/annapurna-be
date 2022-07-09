@@ -3,6 +3,7 @@ package edu.miu.annapurnabe.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -24,7 +25,7 @@ import static javax.persistence.FetchType.EAGER;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "users")
-public class User {
+public class User implements Serializable {
     private static final Character DISABLE = 'D';
     private static final Character ACTIVE = 'A';
 

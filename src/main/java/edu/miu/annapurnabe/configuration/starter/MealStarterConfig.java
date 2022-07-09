@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
+
 import javax.annotation.Resource;
 import java.util.List;
 
@@ -31,25 +32,31 @@ public class MealStarterConfig implements CommandLineRunner {
         log.info("--------- RUNNING MEAL STARTER CONFIG 4 ----------------");
         MealCourse main = mealCourseRepository.findByName("main");
         MealCourse soup = mealCourseRepository.findByName("soups");
-        MealCourse desert = mealCourseRepository.findByName("desert");
+        MealCourse dessert = mealCourseRepository.findByName("dessert");
         MealCourse fruits = mealCourseRepository.findByName("fruits");
         mealRepository.saveAll(
                 List.of(
-                        new Meal("Pizza", main),
-                        new Meal("Bread",main),
-                        new Meal("Milk", main),
-                        new Meal("Rice",main),
-                        new Meal("Broccoli",main),
-                        new Meal("Dahl",soup),
-                        new Meal("Pea soup", soup),
-                        new Meal("Potatoes", main),
-                        new Meal ("Coffee",main),
-                        new Meal("Egg", main),
-                        new Meal("Chickpeas", main),
-                        new Meal("Kidney Beans", main),
-                        new Meal("Yoghurt", desert),
-                        new Meal("Banana Pancake", desert),
-                        new Meal("Orange",fruits)
+                        new Meal("Apple", "", fruits, false, false, false),
+                        new Meal("Orange", "", fruits, false, false, false),
+                        new Meal("Banana", "", fruits, false, false, false),
+                        new Meal("Pea soup", "", soup, false, false, false),
+                        new Meal("Dahl", "", soup, false, false, false),
+                        new Meal("Roasted Potatoes", "", main, false, false, false),
+                        new Meal("Eggs", "", main, false, false, false),
+                        new Meal("Red Sauce", "", main, false, true, false),
+                        new Meal("Pasta", "", main, true, false, false),
+                        new Meal("Broccoli", "", main, false, false, false),
+                        new Meal("Rice", "", main, true, false, false),
+                        new Meal("Cinnamon Muffin", "", dessert, true, true, true),
+                        new Meal("Ice Cream", "", dessert, false, true, true),
+                        new Meal("Yoghurt", "", dessert, false, true, true),
+                        new Meal("Banana Cake", "", dessert, true, false, true)
                 ));
+        List<Object[]> objects = mealRepository.test("Cinnamon Muffin");
+        System.out.println("++++++ >>>>" + objects.size());
+        System.out.println(objects.get(0)[1]);
+        System.out.println(objects.get(0)[0]);
+
+
     }
 }

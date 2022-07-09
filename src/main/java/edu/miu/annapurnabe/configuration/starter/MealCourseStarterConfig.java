@@ -29,9 +29,9 @@ public class MealCourseStarterConfig implements CommandLineRunner{
 
         log.info("--------- RUNNING MEAL COURSE CONFIG 2 ----------------");
         MealCourse fruits = new MealCourse("fruits");
-        MealCourse main = new MealCourse("main");
-        MealCourse desert = new MealCourse("desert");
         MealCourse soups = new MealCourse("soups");
-        mealCourseService.saveMealCourses(List.of(fruits, main, desert, soups));
+        MealCourse main = new MealCourse("main");
+        MealCourse dessert = new MealCourse("dessert");
+        mealCourseService.saveMealCourses(List.of(fruits, main, dessert, soups));
     }
 }

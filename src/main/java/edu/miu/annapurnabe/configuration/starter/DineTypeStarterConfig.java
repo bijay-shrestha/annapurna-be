@@ -26,9 +26,9 @@ public class DineTypeStarterConfig implements CommandLineRunner{
     public void run(String... args) throws Exception {
 
         log.info("--------- RUNNING DINE TYPE CONFIG 3 ----------------");
-        DineType breakfast = new DineType("Breakfast");
-        DineType lunch = new DineType("Lunch");
-        DineType dinner = new DineType("Dinner");
+        DineType breakfast = new DineType("BREAKFAST");
+        DineType lunch = new DineType("LUNCH");
+        DineType dinner = new DineType("DINNER");
         dineTypeRepository.saveAll(List.of(breakfast, lunch, dinner));
     }
 }

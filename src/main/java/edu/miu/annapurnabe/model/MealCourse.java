@@ -1,10 +1,9 @@
 package edu.miu.annapurnabe.model;
 
 import lombok.*;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+
+import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * @author bijayshrestha on 7/7/22
@@ -16,7 +15,8 @@ import javax.persistence.Id;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class MealCourse {
+@Table(name = "meal_course")
+public class MealCourse implements Serializable {
     private static final Character DISABLE = 'D';
     private static final Character ACTIVE = 'A';
 
