@@ -26,8 +26,4 @@ public interface MealRepository extends JpaRepository<Meal, Integer> {
 
     @Query("SELECT m FROM Meal m  WHERE m.name=:name AND m.status='A'")
     Optional<Meal> findByName(String name);
-
-    @Query(value = "Select m.name, mc.name as mealcourse from meals m " +
-            "left join meal_course mc on mc.id=m.meal_course_id where m.name=:name", nativeQuery = true)
-    List<Object[]> test(String name);
 }

@@ -52,11 +52,6 @@ public class MealStarterConfig implements CommandLineRunner {
                         new Meal("Yoghurt", "", dessert, false, true, true),
                         new Meal("Banana Cake", "", dessert, true, false, true)
                 ));
-        List<Object[]> objects = mealRepository.test("Cinnamon Muffin");
-        System.out.println("++++++ >>>>" + objects.size());
-        System.out.println(objects.get(0)[1]);
-        System.out.println(objects.get(0)[0]);
-
 
     }
 }
