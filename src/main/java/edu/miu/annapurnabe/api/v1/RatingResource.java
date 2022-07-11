@@ -29,11 +29,5 @@ public class RatingResource {
     @GetMapping
     public ResponseEntity<List<String>> testRating(){
         return ResponseEntity.ok(ratingService.getRatings());
-
-    }
-
-    @PostMapping
-    public String testPostRating(){
-        return "I am POST acccessible!";
     }
 }

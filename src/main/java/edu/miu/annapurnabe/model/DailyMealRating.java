@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,12 +22,19 @@ import java.util.List;
 @NoArgsConstructor
 @Table(name = "daily_meal_rating")
 public class DailyMealRating implements Serializable {
+    public static final String DAILY_MEAL_RATING_SUCCESS_MESSAGE = ", Thank you, for rating our service!";
+
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne
+    @JoinColumn(name = "daily_meal_id")
+    private DailyMeal dailyMealId;
+
     @Column(name = "rating_date")
-    private LocalDate date;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date date;
 
     @ManyToMany(fetch=FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinTable(name = "daily_meal_user_ratings", joinColumns = @JoinColumn(
@@ -39,4 +47,10 @@ public class DailyMealRating implements Serializable {
     @Column(length = 8)
     private Rating rating;
 
+    public DailyMealRating(DailyMeal dailyMealId, Date date, Collection<User> users, Rating rating) {
+        this.dailyMealId = dailyMealId;
+        this.date = date;
+        this.users = users;
+        this.rating = rating;
+    }
 }

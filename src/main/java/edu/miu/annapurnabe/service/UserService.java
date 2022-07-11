@@ -1,7 +1,9 @@
 package edu.miu.annapurnabe.service;
 
-import edu.miu.annapurnabe.dto.request.UserResponseDTO;
+import edu.miu.annapurnabe.dto.request.UserRequestDTO;
 import edu.miu.annapurnabe.dto.request.UserUpdateRequestDTO;
+import edu.miu.annapurnabe.dto.response.UserResponseDTO;
+
 import java.util.List;
 
 /**
@@ -14,7 +16,7 @@ public interface UserService {
 
     UserResponseDTO getUserById(Integer studentId);
 
-    UserResponseDTO registerUsers(UserResponseDTO userResponseDTO);
+    UserResponseDTO registerUsers(UserRequestDTO userRequestDTO);
 
     UserResponseDTO updateUser(Integer id, UserUpdateRequestDTO userUpdateRequestDTO);
 

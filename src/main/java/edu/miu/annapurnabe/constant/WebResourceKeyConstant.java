@@ -31,4 +31,8 @@ public class WebResourceKeyConstant {
     public interface DailyMealResourceConstant{
         String DAILY_MEALS="/daily-meals";
     }
+    public interface DailyMealRatingResourceConstant{
+        String DAILY_MEALS_RATING="/daily-meals/rating";
+    }
+
 }

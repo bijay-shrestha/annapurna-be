@@ -19,7 +19,7 @@ public class RatingServiceImpl implements RatingService {
     @Override
     public List<String> getRatings() {
         return Stream.of(Rating.values())
-                .map(Rating::getLabel)
+                .map(Rating::getValue)
                 .collect(Collectors.toList());
     }
 }

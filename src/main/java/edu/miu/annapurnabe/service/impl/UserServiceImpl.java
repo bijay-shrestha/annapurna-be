@@ -1,14 +1,12 @@
 package edu.miu.annapurnabe.service.impl;
 
-import edu.miu.annapurnabe.dto.request.UserResponseDTO;
+import edu.miu.annapurnabe.dto.request.UserRequestDTO;
 import edu.miu.annapurnabe.dto.request.UserUpdateRequestDTO;
+import edu.miu.annapurnabe.dto.response.UserResponseDTO;
 import edu.miu.annapurnabe.model.User;
 import edu.miu.annapurnabe.repository.UserRepository;
 import edu.miu.annapurnabe.service.UserService;
 import org.modelmapper.ModelMapper;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -59,15 +57,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserResponseDTO registerUsers(UserResponseDTO userResponseDTO) {
+    public UserResponseDTO registerUsers(UserRequestDTO userRequestDTO) {
         Optional<User> isUserExist = userRepository.findByUserIdOrUsernameOrEmail(
-                userResponseDTO.getUserId(),
-                userResponseDTO.getEmail(),
-                userResponseDTO.getUsername());
+                userRequestDTO.getUserId(),
+                userRequestDTO.getEmail(),
+                userRequestDTO.getUsername());
         if(isUserExist.isPresent()){
             throw new IllegalStateException(USER_ALREADY_EXIST);
         }
-        User userRequest = modelMapper.map(userResponseDTO, User.class);
+        User userRequest = modelMapper.map(userRequestDTO, User.class);
         userRequest.setPassword(passwordEncoder.encode(userRequest.getPassword()));
         User user = userRepository.save(userRequest);
         return modelMapper.map(user, UserResponseDTO.class);

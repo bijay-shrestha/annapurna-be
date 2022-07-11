@@ -8,6 +8,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -29,6 +31,9 @@ public class DailyMeal implements Serializable {
 
     @ManyToOne
     private Meal meal;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "dailyMealId")
+    private Collection<DailyMealRating> dailyMealRatings = new ArrayList<>();
 
     private LocalDate date;
 
