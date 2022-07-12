@@ -14,4 +14,5 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class MealRequestDTO implements Serializable {
     private String name;
+    private Integer mealCourseId;
 }

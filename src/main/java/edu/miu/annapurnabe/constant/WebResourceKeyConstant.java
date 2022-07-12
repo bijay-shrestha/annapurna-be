@@ -27,4 +27,8 @@ public class WebResourceKeyConstant {
     public interface LoginResourceConstant{
         String REFRESH_TOKEN="/token/refresh";
     }
+
+    public interface DailyMealResourceConstant{
+        String DAILY_MEALS="/daily-meals";
+    }
 }

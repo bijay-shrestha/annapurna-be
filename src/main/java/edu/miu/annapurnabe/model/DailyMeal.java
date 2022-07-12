@@ -3,8 +3,12 @@ package edu.miu.annapurnabe.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  * @author bijayshrestha on 6/28/22
@@ -14,7 +18,8 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class DailyMeal {
+@Table(name = "daily_meals")
+public class DailyMeal implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

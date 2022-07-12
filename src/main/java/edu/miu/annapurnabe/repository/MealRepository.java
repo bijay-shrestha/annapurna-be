@@ -3,8 +3,12 @@ package edu.miu.annapurnabe.repository;
 import edu.miu.annapurnabe.model.Meal;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
+import javax.swing.text.html.Option;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -22,4 +26,8 @@ public interface MealRepository extends JpaRepository<Meal, Integer> {
 
     @Query("SELECT m FROM Meal m  WHERE m.name=:name AND m.status='A'")
     Optional<Meal> findByName(String name);
+
+    @Query(value = "Select m.name, mc.name as mealcourse from meals m " +
+            "left join meal_course mc on mc.id=m.meal_course_id where m.name=:name", nativeQuery = true)
+    List<Object[]> test(String name);
 }
