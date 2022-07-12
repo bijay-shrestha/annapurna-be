@@ -1,7 +1,8 @@
 package edu.miu.annapurnabe.api.v1;
 
-import edu.miu.annapurnabe.dto.request.UserResponseDTO;
+import edu.miu.annapurnabe.dto.request.UserRequestDTO;
 import edu.miu.annapurnabe.dto.request.UserUpdateRequestDTO;
+import edu.miu.annapurnabe.dto.response.UserResponseDTO;
 import edu.miu.annapurnabe.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,21 +37,21 @@ public class UserResource {
     }
 
     @PostMapping
-    public ResponseEntity<UserResponseDTO> registerUser(@RequestBody UserResponseDTO
-                                                                                                     userResponseDTO) {
-        return new ResponseEntity<>(userService.registerUsers(userResponseDTO), HttpStatus.CREATED);
+    public ResponseEntity<UserResponseDTO> registerUser(@RequestBody UserRequestDTO
+                                                               userRequestDTO) {
+        return new ResponseEntity<>(userService.registerUsers(userRequestDTO), HttpStatus.CREATED);
     }
 
     @PutMapping(USER_ID)
     public ResponseEntity<UserResponseDTO> updateStudent(@PathVariable("userId") Integer id,
-                                                         @RequestBody UserUpdateRequestDTO userUpdateRequestDTO) {
-        UserResponseDTO userResponseDTO = userService.updateUser(id, userUpdateRequestDTO);
-        return ResponseEntity.ok().body(userResponseDTO);
+                                                        @RequestBody UserUpdateRequestDTO userUpdateRequestDTO) {
+        UserResponseDTO userRequestDTO = userService.updateUser(id, userUpdateRequestDTO);
+        return ResponseEntity.ok().body(userRequestDTO);
     }
 
     @DeleteMapping(USER_ID)
     public ResponseEntity<UserResponseDTO> deleteStudent(@PathVariable("userId") Integer id) {
-       UserResponseDTO studentToBeDeleted = userService.deleteUser(id);
+        UserResponseDTO studentToBeDeleted = userService.deleteUser(id);
         return ResponseEntity.ok().body(studentToBeDeleted);
     }
 }

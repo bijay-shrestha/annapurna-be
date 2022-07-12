@@ -52,6 +52,9 @@ public class User implements Serializable {
     @ManyToMany(fetch = EAGER)
     private Set<UserRole> userRoles = new HashSet<>();
 
+    @ManyToMany(mappedBy = "users")
+    private Collection<DailyMealRating> dailyMealRatings = new ArrayList<>();
+
     public void disable(){
         this.status = DISABLE;
     }

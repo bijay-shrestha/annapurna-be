@@ -1,3 +1,7 @@
+server:
+  port: 8080
+  error:
+    include-message: always
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
@@ -10,4 +14,11 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
-    show-sql: true
+    show-sql: false
+
+apiTitle: "Annapurna Rating System API"
+apiDescription: "AnnapurnaRS is a place for all the food enthusiasts at MIU to make dining more joyful, high-quality, satisfactory and much more."
+apiVersion: "1.0.0"
+apiContactName: "Derartu Abdisa, Shelly Neira Bastos, Bijay Shrestha"
+apiContactEmail: "dabdisa@xyz.com, msbastos@abc.com, bijay@123.com"
+apiContactUrl: "https://annapurna.example.com"
