@@ -1,4 +1,4 @@
-package edu.miu.annapurnabe.configuration;
+package edu.miu.annapurnabe.configuration.starter;
 
 import edu.miu.annapurnabe.model.DineType;
 import edu.miu.annapurnabe.repository.DineTypeRepository;

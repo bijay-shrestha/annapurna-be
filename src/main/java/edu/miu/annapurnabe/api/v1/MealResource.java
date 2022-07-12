@@ -1,4 +1,4 @@
-package edu.miu.annapurnabe.api;
+package edu.miu.annapurnabe.api.v1;
 
 import edu.miu.annapurnabe.dto.request.MealRequestDTO;
 import edu.miu.annapurnabe.dto.request.MealUpdateRequestDTO;

@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class StudentResponseDTO implements Serializable {
+public class UserResponseDTO implements Serializable {
     private Integer studentId;
     private String fullName;
     private String email;

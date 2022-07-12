@@ -9,7 +9,7 @@ import java.time.LocalDate;
  * @project annapurna-be
  */
 @Data
-public class StudentUpdateRequestDTO implements Serializable {
+public class UserUpdateRequestDTO implements Serializable {
     private String fullName;
     private String email;
     private LocalDate dateOfBirth;
