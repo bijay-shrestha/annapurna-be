@@ -33,4 +33,13 @@ public enum Rating {
             MAP.put(field.getValue(), field);
         }
     }
+
+    public static Boolean findByValue(String value) {
+        for (Rating rating : values()) {
+            if (rating.getValue().equalsIgnoreCase(value)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

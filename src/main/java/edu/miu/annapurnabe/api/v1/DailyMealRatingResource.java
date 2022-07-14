@@ -1,15 +1,17 @@
 package edu.miu.annapurnabe.api.v1;
 
 import edu.miu.annapurnabe.dto.request.DailyMealRatingRequestDTO;
+import edu.miu.annapurnabe.dto.request.InsightRequestDTO;
 import edu.miu.annapurnabe.dto.response.DailyMealRatingResponseDTO;
+import edu.miu.annapurnabe.dto.response.MealResponseDetailDTO;
+import edu.miu.annapurnabe.dto.response.TopMealResponseDetailDTO;
 import edu.miu.annapurnabe.exception.DataNotFoundException;
 import edu.miu.annapurnabe.service.DailyMealRatingService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 import static edu.miu.annapurnabe.constant.WebResourceKeyConstant.API_V1_BASE;
 import static edu.miu.annapurnabe.constant.WebResourceKeyConstant.DailyMealRatingResourceConstant.DAILY_MEALS_RATING;
@@ -31,6 +33,15 @@ public class DailyMealRatingResource {
     @PostMapping
     public ResponseEntity<DailyMealRatingResponseDTO> addDailyMealRating(
             @RequestBody DailyMealRatingRequestDTO dailyMealRatingRequestDTO) throws DataNotFoundException {
-        return new ResponseEntity<DailyMealRatingResponseDTO>(dailyMealRatingService.addDailyMealRating(dailyMealRatingRequestDTO), HttpStatus.CREATED);
+        return new ResponseEntity<>(dailyMealRatingService.addDailyMealRating(dailyMealRatingRequestDTO), HttpStatus.CREATED);
+    }
+
+    @GetMapping("/{ratingStatus}")
+    public ResponseEntity<List<TopMealResponseDetailDTO>>
+    getMealWithMostRatingStatus(@PathVariable String ratingStatus,
+                                @RequestBody InsightRequestDTO insightRequestDTO)
+            throws DataNotFoundException {
+        return ResponseEntity.ok(dailyMealRatingService
+                .findTopTwoMealsWithMostRatingStatus(ratingStatus, insightRequestDTO));
     }
 }

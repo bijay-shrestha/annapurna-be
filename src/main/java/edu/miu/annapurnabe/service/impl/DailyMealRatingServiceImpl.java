@@ -1,9 +1,9 @@
 package edu.miu.annapurnabe.service.impl;
 
 import edu.miu.annapurnabe.dto.request.DailyMealRatingRequestDTO;
+import edu.miu.annapurnabe.dto.request.InsightRequestDTO;
 import edu.miu.annapurnabe.dto.response.DailyMealRatingResponseDTO;
-import edu.miu.annapurnabe.dto.response.DailyMealResponseDTO;
-import edu.miu.annapurnabe.dto.response.UserResponseDTO;
+import edu.miu.annapurnabe.dto.response.TopMealResponseDetailDTO;
 import edu.miu.annapurnabe.exception.DataNotFoundException;
 import edu.miu.annapurnabe.model.DailyMeal;
 import edu.miu.annapurnabe.model.DailyMealRating;
@@ -18,11 +18,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
-import java.util.Date;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import static edu.miu.annapurnabe.constant.ExceptionMessageConstant.*;
+import static edu.miu.annapurnabe.constant.PatternConstant.DATE_PATTERN;
 import static edu.miu.annapurnabe.model.DailyMealRating.DAILY_MEAL_RATING_SUCCESS_MESSAGE;
+import static edu.miu.annapurnabe.utils.DailyMealUtils.convertDailyMealNativeObjectListToTopTwoMealResponseDetailDTO;
 
 /**
  * @author bijayshrestha on 7/11/22
@@ -48,14 +50,42 @@ public class DailyMealRatingServiceImpl implements DailyMealRatingService {
     @Override
     public DailyMealRatingResponseDTO addDailyMealRating(DailyMealRatingRequestDTO dailyMealRatingRequestDTO)
             throws DataNotFoundException {
-        User user = userRepository.findById(dailyMealRatingRequestDTO.getUserId()).orElseThrow(
-                ()-> new DataNotFoundException(USER_NOT_FOUND, USER_NOT_FOUND_DEVELOPER_MESSAGE));
-        DailyMeal dailyMeal = dailyMealRepository.findById(dailyMealRatingRequestDTO.getDailyMealId()).orElseThrow(
-                ()->new DataNotFoundException(DAILY_MEAL_NOT_FOUND, DAILY_MEAL_NOT_FOUND_DEVELOPER_MESSAGE));
-
+        User user = verifyUser(dailyMealRatingRequestDTO);
+        DailyMeal dailyMeal = verifyDailyMeal(dailyMealRatingRequestDTO);
+        verifyRatingStatus(dailyMealRatingRequestDTO.getRating());
         saveDailyMealRating(dailyMealRatingRequestDTO, user, dailyMeal);
         return prepareDailyMealRatingResponse(dailyMealRatingRequestDTO, user);
     }
+
+    @Override
+    public List<TopMealResponseDetailDTO> findTopTwoMealsWithMostRatingStatus(String ratingStatus, InsightRequestDTO insightRequestDTO) throws DataNotFoundException {
+        verifyRatingStatus(ratingStatus);
+        List<TopMealResponseDetailDTO> topTwoMeal = convertDailyMealNativeObjectListToTopTwoMealResponseDetailDTO.apply(
+                dailyMealRatingRepository.findTopTwoMealsWithMostRatingStatus(Rating.getByName(ratingStatus).name(),
+                        insightRequestDTO.getFromDate().format(DateTimeFormatter.ofPattern(DATE_PATTERN)),
+                        insightRequestDTO.getToDate().format(DateTimeFormatter.ofPattern(DATE_PATTERN)))
+        );
+        return topTwoMeal;
+    }
+
+    private void verifyRatingStatus(String ratingStatus) throws DataNotFoundException {
+        if (!Rating.findByValue(ratingStatus)) {
+            throw new DataNotFoundException(RATING_STATUS_NOT_FOUND,
+                    RATING_STATUS_NOT_FOUND_DEVELOPER_MESSAGE);
+        }
+    }
+
+
+    private DailyMeal verifyDailyMeal(DailyMealRatingRequestDTO dailyMealRatingRequestDTO) throws DataNotFoundException {
+        return dailyMealRepository.findById(dailyMealRatingRequestDTO.getDailyMealId()).orElseThrow(
+                () -> new DataNotFoundException(DAILY_MEAL_NOT_FOUND, DAILY_MEAL_NOT_FOUND_DEVELOPER_MESSAGE));
+    }
+
+    private User verifyUser(DailyMealRatingRequestDTO dailyMealRatingRequestDTO) throws DataNotFoundException {
+        return userRepository.findById(dailyMealRatingRequestDTO.getUserId()).orElseThrow(
+                () -> new DataNotFoundException(USER_NOT_FOUND, USER_NOT_FOUND_DEVELOPER_MESSAGE));
+    }
+
 
     private DailyMealRatingResponseDTO prepareDailyMealRatingResponse(DailyMealRatingRequestDTO dailyMealRatingRequestDTO,
                                                                       User user) {
@@ -68,7 +98,8 @@ public class DailyMealRatingServiceImpl implements DailyMealRatingService {
 
     private void saveDailyMealRating(DailyMealRatingRequestDTO dailyMealRatingRequestDTO,
                                      User user, DailyMeal dailyMeal) {
-        DailyMealRating dailyMealRating = new DailyMealRating(dailyMeal, new Date(), List.of(user),
+        DailyMealRating dailyMealRating = new DailyMealRating(dailyMeal,
+                LocalDate.now(), List.of(user),
                 Rating.getByName(dailyMealRatingRequestDTO.getRating()));
         dailyMealRatingRepository.save(dailyMealRating);
     }

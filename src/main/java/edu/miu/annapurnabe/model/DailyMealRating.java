@@ -8,7 +8,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 
 /**
  * @author bijayshrestha on 7/9/22
@@ -33,8 +32,7 @@ public class DailyMealRating implements Serializable {
     private DailyMeal dailyMealId;
 
     @Column(name = "rating_date")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date date;
+    private LocalDate date;
 
     @ManyToMany(fetch=FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinTable(name = "daily_meal_user_ratings", joinColumns = @JoinColumn(
@@ -47,7 +45,7 @@ public class DailyMealRating implements Serializable {
     @Column(length = 8)
     private Rating rating;
 
-    public DailyMealRating(DailyMeal dailyMealId, Date date, Collection<User> users, Rating rating) {
+    public DailyMealRating(DailyMeal dailyMealId, LocalDate date, Collection<User> users, Rating rating) {
         this.dailyMealId = dailyMealId;
         this.date = date;
         this.users = users;
