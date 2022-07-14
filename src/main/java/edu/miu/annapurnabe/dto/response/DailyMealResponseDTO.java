@@ -1,13 +1,9 @@
 package edu.miu.annapurnabe.dto.response;
 
-import edu.miu.annapurnabe.model.MealCourse;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
 /**
  * @author bijayshrestha on 7/7/22
