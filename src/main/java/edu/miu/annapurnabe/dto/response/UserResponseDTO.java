@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserResponseDTO implements Serializable {
-    private Integer studentId;
+    private Integer userId;
     private String fullName;
     private String email;
     private String username;
