@@ -60,12 +60,11 @@ public class DailyMealRatingServiceImpl implements DailyMealRatingService {
     @Override
     public List<TopMealResponseDetailDTO> findTopTwoMealsWithMostRatingStatus(String ratingStatus, InsightRequestDTO insightRequestDTO) throws DataNotFoundException {
         verifyRatingStatus(ratingStatus);
-        List<TopMealResponseDetailDTO> topTwoMeal = convertDailyMealNativeObjectListToTopTwoMealResponseDetailDTO.apply(
+        return convertDailyMealNativeObjectListToTopTwoMealResponseDetailDTO.apply(
                 dailyMealRatingRepository.findTopTwoMealsWithMostRatingStatus(Rating.getByName(ratingStatus).name(),
                         insightRequestDTO.getFromDate().format(DateTimeFormatter.ofPattern(DATE_PATTERN)),
                         insightRequestDTO.getToDate().format(DateTimeFormatter.ofPattern(DATE_PATTERN)))
         );
-        return topTwoMeal;
     }
 
     private void verifyRatingStatus(String ratingStatus) throws DataNotFoundException {
