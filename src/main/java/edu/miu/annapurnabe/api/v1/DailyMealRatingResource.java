@@ -35,13 +35,4 @@ public class DailyMealRatingResource {
             @RequestBody DailyMealRatingRequestDTO dailyMealRatingRequestDTO) throws DataNotFoundException {
         return new ResponseEntity<>(dailyMealRatingService.addDailyMealRating(dailyMealRatingRequestDTO), HttpStatus.CREATED);
     }
-
-    @GetMapping("/{ratingStatus}")
-    public ResponseEntity<List<TopMealResponseDetailDTO>>
-    getMealWithMostRatingStatus(@PathVariable String ratingStatus,
-                                @RequestBody InsightRequestDTO insightRequestDTO)
-            throws DataNotFoundException {
-        return ResponseEntity.ok(dailyMealRatingService
-                .findTopTwoMealsWithMostRatingStatus(ratingStatus, insightRequestDTO));
-    }
 }

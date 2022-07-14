@@ -35,4 +35,9 @@ public class WebResourceKeyConstant {
         String DAILY_MEALS_RATING="/daily-meals/rating";
     }
 
+    public interface InsightResourceConstant{
+        String ANNAPURNA_INSIGHT="/annapurna/insight";
+        String TOP_TWO_RATING_STATUS="/top-two/{ratingStatus}";
+    }
+
 }
