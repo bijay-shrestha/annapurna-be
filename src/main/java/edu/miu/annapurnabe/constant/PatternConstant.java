@@ -6,4 +6,6 @@ package edu.miu.annapurnabe.constant;
  */
 public class PatternConstant {
         public static final String EMAIL_PATTERN = "^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$";
+        public static final String DATE_PATTERN = "yyyy-MM-dd";
+
 }

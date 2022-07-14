@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static edu.miu.annapurnabe.utils.DailyMealUtils.convertObjectListToResponse;
+import static edu.miu.annapurnabe.utils.DailyMealUtils.convertDailyMealNativeObjectListToMealResponseDetailDTO;
 import static edu.miu.annapurnabe.constant.MealConstants.*;
 
 /**
@@ -54,13 +54,13 @@ public class DailyMealServiceImpl implements DailyMealService {
     private DailyMealDetailResponseDTO fetchDailyMealResponse(DailyMealRequestDTO dailyMealRequestDTO, String dineType) {
         DailyMealDetailResponseDTO dailyMealDetailResponseDTO = new DailyMealDetailResponseDTO();
         String today = dailyMealRequestDTO.getTodayDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        List<MealResponseDetailDTO> fruits = convertObjectListToResponse.apply(dailyMealRepository
+        List<MealResponseDetailDTO> fruits = convertDailyMealNativeObjectListToMealResponseDetailDTO.apply(dailyMealRepository
                 .getTodayMeal(today, FRUITS, dineType));
-        List<MealResponseDetailDTO> dessert = convertObjectListToResponse.apply(dailyMealRepository
+        List<MealResponseDetailDTO> dessert = convertDailyMealNativeObjectListToMealResponseDetailDTO.apply(dailyMealRepository
                 .getTodayMeal(today,DESSERT, dineType));
-        List<MealResponseDetailDTO> main = convertObjectListToResponse.apply(dailyMealRepository
+        List<MealResponseDetailDTO> main = convertDailyMealNativeObjectListToMealResponseDetailDTO.apply(dailyMealRepository
                 .getTodayMeal(today,MAIN, dineType));
-        List<MealResponseDetailDTO> soup = convertObjectListToResponse.apply(dailyMealRepository
+        List<MealResponseDetailDTO> soup = convertDailyMealNativeObjectListToMealResponseDetailDTO.apply(dailyMealRepository
                 .getTodayMeal(today, SOUPS, dineType));
 
         dailyMealDetailResponseDTO.setFruits(fruits);
