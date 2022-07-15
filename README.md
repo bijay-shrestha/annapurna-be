@@ -14,16 +14,17 @@ And this is where Annapurna Rating System comes?
 
 # API Documentation
 By default, the application deploys in Port 8080. The API documentation is maintained with Swagger.
-- **Swagger URL:** http://localhost:8080/swagger-ui/index.html#/
-- **Postman Collection:** All the API's are maintained as a Postman Collection. Please find the collection file in `0.7-Postman-Collection` directory inside `documentation` folder.
-  - **Postman API usage details:** After successfully importing the Postman collection `SWE-Annapurna` by using the provided`.json` file. 
-    - First use `POST Login` API
-      - There are three valid users with different `Roles` with following user credentials 
-        ```
-        username: derartu, password: derartu
-        username: shelly, password: shelly
-        username: bijay, password: bijay```
-    - Then you can use any APIs using the provided `access_token`
+1. **Swagger URL:** http://localhost:8080/swagger-ui/index.html#/
+2. **Postman Collection:** All the API's are maintained as a Postman Collection. Please find the collection file in `0.7-Postman-Collection` directory inside `documentation` folder. 
+3. **Postman API usage details:** After successfully importing the Postman collection `SWE-Annapurna` by using the provided`.json` file. 
+      First use `POST Login` API
+4. There are three valid users with different `Roles` with following user credentials 
+  ```
+  username: derartu, password: derartu
+  username: shelly, password: shelly
+  username: bijay, password: bijay
+  ```
+5. Then you can use any APIs using the provided `access_token`
 
 # SQL Scripts
 I used the SQL scripts inside `0.8-Default-SQL-Scripts` to test my APIs but they are not mandatory to execute.
