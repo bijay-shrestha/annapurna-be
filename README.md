@@ -30,7 +30,7 @@ By default, the application deploys in Port 8080. The API documentation is maint
 I used the SQL scripts inside `0.8-Default-SQL-Scripts` to test my APIs but they are not mandatory to execute.
 It basically helps you enter the Daily Meal Rating received between `2022-07-13` and `2022-07-14`. _Note: Execute them in the file order._
 
-#JIRA
+# JIRA
 
 https://user-images.githubusercontent.com/7867129/179125063-80ca3b3b-8f67-463d-bd7e-2327a93494e9.mp4
 
